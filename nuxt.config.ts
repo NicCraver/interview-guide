@@ -5,13 +5,17 @@ export default defineNuxtConfig({
   devServer: {
     port: 3060,
   },
+
   modules: [
     '@vueuse/nuxt',
     '@pinia/nuxt',
     '@nuxtjs/color-mode',
     '@vite-pwa/nuxt',
     '@nuxt/eslint',
+    'nuxt-monaco-editor',
   ],
+
+  monacoEditor: { lang: 'zh-cn' },
 
   experimental: {
     // when using generate, payload js assets included in sw precache manifest
@@ -58,9 +62,20 @@ export default defineNuxtConfig({
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { name: 'description', content: appDescription },
-        { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
-        { name: 'theme-color', media: '(prefers-color-scheme: light)', content: 'white' },
-        { name: 'theme-color', media: '(prefers-color-scheme: dark)', content: '#222222' },
+        {
+          name: 'apple-mobile-web-app-status-bar-style',
+          content: 'black-translucent',
+        },
+        {
+          name: 'theme-color',
+          media: '(prefers-color-scheme: light)',
+          content: 'white',
+        },
+        {
+          name: 'theme-color',
+          media: '(prefers-color-scheme: dark)',
+          content: '#222222',
+        },
       ],
     },
   },
@@ -76,4 +91,6 @@ export default defineNuxtConfig({
       standalone: false,
     },
   },
+
+  compatibilityDate: '2024-08-07',
 })

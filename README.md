@@ -1,17 +1,92 @@
-<p align="center">
-<img src="https://user-images.githubusercontent.com/11247099/140462375-7b7ac4db-35b7-453c-8a05-13d8d20282c4.png" width="600"/>
-</p>
+# 面试宝典
 
-<h2 align="center">
-<a href="https://github.com/antfu/vitesse">Vitesse</a> for Nuxt 3
-</h2><br>
+## 接口
 
-<p align="center">
-<br>
-<a href="https://vitesse-nuxt3.netlify.app/">🖥 Online Preview</a>
-<br><br>
-<a href="https://stackblitz.com/github/antfu/vitesse-nuxt3"><img src="https://developer.stackblitz.com/img/open_in_stackblitz.svg" alt=""></a>
-</p>
+- [ ] 题目列表
+
+## TO DO
+
+- [ ] 完善题目数量 50道题
+- [ ] 题目录入工具
+- [ ] 完善题库数据结构
+- [ ] 题目类型
+- [ ] 题目难度
+- [ ] 题目来源
+- [ ] 题目标签
+- [ ] 题目答案
+- [ ] 题目解析
+- [ ] 题目选项
+- [ ] 题目题干
+- [ ] 题目ID
+- [ ] 题目创建时间
+- [ ] 题目更新时间
+- [ ] 题目所属科目
+- [ ] 题目所属章节
+- [ ] 题目所属知识点
+- [ ] 题目所属题库
+- [ ] 集成代码编辑器Monaco https://microsoft.github.io/monaco-editor/
+- [ ] Monaco多语言支持
+- [ ] Monaco主题切换
+- [ ] Monaco代码高亮
+- [ ] Monaco代码折叠
+- [ ] Monaco代码自动补全
+- [ ] Monaco代码格式化
+
+## 题库管理
+
+- [ ] 题库列表
+- [ ] 题库详情
+- [ ] 题库编辑
+- [ ] 题库删除
+- [ ] 题库导入
+- [ ] 题库导出
+
+## 题目管理
+
+- [ ] 题目列表
+- [ ] 题目详情
+- [ ] 题目编辑
+- [ ] 题目删除
+- [ ] 题目导入
+- [ ] 题目导出
+
+## 用户管理
+
+- [ ] 用户列表
+- [ ] 用户详情
+- [ ] 用户编辑
+- [ ] 用户删除
+- [ ] 用户导入
+- [ ] 用户导出
+
+## 权限管理
+
+- [ ] 角色列表
+- [ ] 角色详情
+- [ ] 角色编辑
+- [ ] 角色删除
+- [ ] 角色导入
+- [ ] 角色导出
+
+## 日志管理
+
+- [ ] 日志列表
+- [ ] 日志详情
+- [ ] 日志编辑
+- [ ] 日志删除
+- [ ] 日志导入
+- [ ] 日志导出
+
+## 系统设置
+
+- [ ] 系统设置列表
+- [ ] 系统设置详情
+- [ ] 系统设置编辑
+- [ ] 系统设置删除
+- [ ] 系统设置导入
+- [ ] 系统设置导出
+
+## 其他
 
 ## Features
 
