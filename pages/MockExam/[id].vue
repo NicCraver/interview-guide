@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import type { languages } from 'monaco-editor'
 import TTextarea from '~/components/ui/TTextarea.vue'
 import TSelect from '~/components/ui/TSelect.vue'
 

@@ -9,6 +9,12 @@ export default nuxt(
       formatters: true,
       rules: {
         'no-console': 'off',
+        'no-irregular-whitespace': ['error', {
+          skipStrings: true,
+          skipComments: true,
+          skipRegExps: true,
+          skipTemplates: true,
+        }],
       },
     },
   ),
