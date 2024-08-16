@@ -1,4 +1,3 @@
-import { CheckIcon } from '@heroicons/vue/24/solid'
 import type { Prisma } from '@prisma/client'
 import { PrismaClient } from '@prisma/client'
 import { defineEventHandler, getQuery } from 'h3'

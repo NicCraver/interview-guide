@@ -21,15 +21,16 @@ describe('用户接口测试', () => {
     await prisma.$connect()
   })
 
-  afterAll(async () => {
-    // 断开数据库连接
-    await prisma.$disconnect()
-  })
   beforeEach(async () => {
     // 在每个测试之前清理数据库
     await prisma.user.deleteMany({
       where: { email: { endsWith: '@test.com' } },
     })
+  })
+
+  afterAll(async () => {
+    // 断开数据库连接
+    await prisma.$disconnect()
   })
 
   it('创建用户', async () => {
