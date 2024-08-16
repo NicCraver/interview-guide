@@ -5,25 +5,30 @@ export const useMenuStore = defineStore('user', () => {
     {
       name: 'Home',
       path: '/',
-      icon: 'home',
       current: true,
+      title: 'Home',
+    },
+    {
+      name: 'PracticeQuestions',
+      path: '/PracticeQuestions',
+      title: 'PracticeQuestions',
+      current: false,
     },
     // {
     //   name: 'Exams',
     //   path: '/exams',
-    //   icon: 'book',
     //   current: false,
     // },
     {
       name: 'About',
       path: '/about',
-      icon: 'info',
+      title: 'About',
       current: false,
     },
     {
       name: 'Data',
       path: '/data',
-      icon: 'info',
+      title: 'Data',
       current: false,
     },
   ])

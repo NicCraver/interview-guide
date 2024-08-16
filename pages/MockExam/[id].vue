@@ -1,7 +1,4 @@
 <script setup lang="ts">
-import TTextarea from '~/components/ui/TTextarea.vue'
-import TSelect from '~/components/ui/TSelect.vue'
-
 const route = useRoute<'MockExam-id'>()
 const mockExam = useMockExamStore()
 

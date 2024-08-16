@@ -10,6 +10,7 @@ import {
 } from '@headlessui/vue'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 
+const route = useRoute()
 const user = {
   name: 'Tom Cook',
   email: 'tom@example.com',
@@ -30,6 +31,10 @@ const userNavigation = [
 ]
 
 const { menuList } = useMenuStore()
+
+const headerTitle = computed(() => {
+  return menuList.find(item => item.path === route.path)?.title
+})
 </script>
 
 <template>
@@ -56,14 +61,16 @@ const { menuList } = useMenuStore()
                 </div>
                 <div class="hidden md:block">
                   <div class="ml-10 flex items-baseline space-x-4">
-                    <a
-                      v-for="item in menuList" :key="item.name" :href="item.path"
+                    <NuxtLink
+                      v-for="item in menuList" :key="item.name" :to="item.path"
                       class="rounded-md px-3 py-2 text-sm font-medium" :class="[
-                        item.current
+                        item.path === route.path
                           ? 'bg-gray-900 text-white'
                           : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      ]" :aria-current="item.current ? 'page' : undefined"
-                    >{{ item.name }}</a>
+                      ]" :aria-current="item.path === route.path ? 'page' : undefined"
+                    >
+                      {{ item.name }}
+                    </NuxtLink>
                   </div>
                 </div>
               </div>
@@ -178,7 +185,7 @@ const { menuList } = useMenuStore()
       <header class="py-10">
         <div class="mx-auto max-w-[1440px] px-4 sm:px-6 lg:px-8">
           <h1 class="text-3xl font-bold tracking-tight text-white">
-            Dashboard
+            {{ headerTitle }}
           </h1>
         </div>
       </header>

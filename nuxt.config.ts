@@ -2,9 +2,19 @@ import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
+  alias: {
+    'monaco-editor': 'monaco-editor/esm/vs/editor/editor.api.js',
+  },
   devServer: {
     port: 3060,
   },
+  components: [
+    {
+      path: '~/components/ui/',
+      pathPrefix: false,
+    },
+    '~/components', // 保持对其他组件文件夹的导入
+  ],
 
   modules: [
     '@vueuse/nuxt',
@@ -13,8 +23,20 @@ export default defineNuxtConfig({
     '@vite-pwa/nuxt',
     '@nuxt/eslint',
     'nuxt-monaco-editor',
+    '@nuxt/test-utils/module',
+    'nuxt-lodash',
   ],
-
+  lodash: {
+    prefix: '_',
+    prefixSkip: ['string'],
+    upperAfterPrefix: true,
+    exclude: ['map'],
+    alias: [
+      ['camelCase', 'stringToCamelCase'], // => stringToCamelCase
+      ['kebabCase', 'stringToKebab'], // => stringToKebab
+      ['isDate', 'isLodashDate'], // => _isLodashDate
+    ],
+  },
   monacoEditor: { lang: 'zh-cn' },
 
   experimental: {
