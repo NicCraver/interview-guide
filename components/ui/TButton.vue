@@ -1,46 +1,54 @@
-<!-- <script setup lang="ts">
-const props = defineProps<{
-  size?: 'small' | 'medium' | 'large' | 'xlarge'
-  type?: 'primary' | 'text'
-}>()
+<script setup lang="ts">
+type ButtonSize = 'small' | 'medium' | 'large' | 'xlarge'
+type ButtonType = 'primary' | 'text'
+
+interface ButtonProps {
+  size?: ButtonSize
+  type?: ButtonType
+  disabled?: boolean
+  // loading?: boolean
+}
+
+const props = withDefaults(defineProps<ButtonProps>(), {
+  size: 'medium',
+  type: 'primary',
+  disabled: false,
+  // loading: false,
+})
 
 const buttonClasses = useButtonClasses(props)
 
-function useButtonClasses(props: {
-  size?: 'small' | 'medium' | 'large' | 'xlarge'
-  type?: 'primary' | 'text'
-}) {
+function useButtonClasses(props: ButtonProps) {
   return computed(() => {
     const baseClasses = 'inline-flex items-center gap-x-1.5 font-semibold shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2'
-    const sizeClasses = {
+    const sizeClasses: Record<ButtonSize, string> = {
       small: 'px-2.5 py-1.5 text-sm',
       medium: 'px-3 py-2 text-sm',
       large: 'px-3.5 py-2.5 text-sm',
       xlarge: 'px-4 py-3 text-sm',
     }
-    const typeClasses = {
+    const typeClasses: Record<ButtonType, string> = {
       primary: 'rounded-md bg-indigo-600 text-white hover:bg-indigo-500 focus-visible:outline-indigo-600',
       text: 'rounded-md bg-indigo-50 text-indigo-600 hover:bg-indigo-100 focus-visible:outline-indigo-600',
     }
 
-    return `${baseClasses} ${sizeClasses[props.size || 'medium']} ${typeClasses[props.type || 'primary']}`
+    const disabledClasses = 'opacity-70 cursor-not-allowed'
+
+    return `${baseClasses} ${sizeClasses[props.size || 'medium']} ${typeClasses[props.type || 'primary']} ${props.disabled ? disabledClasses : ''} `
   })
 }
 </script>
 
 <template>
-  <button
-    :class="buttonClasses"
-    type="button"
-  >
+  <button :class="buttonClasses" type="button">
     <slot />
   </button>
 </template>
 
-  <style scoped>
-  /* 添加你需要的样式 */
-</style> -->
-
+<style scoped>
+/* 添加你需要的样式 */
+</style>
+<!--
 <script setup lang="ts">
 import { computed } from 'vue'
 
@@ -108,9 +116,8 @@ function useButtonClasses(props: ButtonProps) {
     type="button"
   >
     <span v-if="loading" class="mr-2">
-      <!-- You can replace this with an actual loading spinner component -->
       Loading...
     </span>
     <slot />
   </button>
-</template>
+</template> -->

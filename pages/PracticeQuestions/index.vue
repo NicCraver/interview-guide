@@ -20,31 +20,8 @@ import { CheckCircleIcon } from '@heroicons/vue/24/solid'
         </button>
       </template>
       <div>
-        <TButton size="small" type="primary">
-          <CheckCircleIcon class="-ml-0.5 h-5 w-5" aria-hidden="true" />
-          Small Primary Button
-        </TButton>
-        <TButton size="medium" type="primary">
+        <TButton>
           Medium Primary Button
-        </TButton>
-        <TButton size="large" type="primary">
-          Large Primary Button
-        </TButton>
-        <TButton size="xlarge" type="primary">
-          XLarge Primary Button
-        </TButton>
-
-        <TButton size="small" type="secondary">
-          Small Secondary Button
-        </TButton>
-        <TButton size="medium" type="secondary">
-          Medium Secondary Button
-        </TButton>
-        <TButton size="large" type="secondary">
-          Large Secondary Button
-        </TButton>
-        <TButton size="xlarge" type="secondary">
-          XLarge Secondary Button
         </TButton>
       </div>
     </TCard>
