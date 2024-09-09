@@ -1,5 +1,4 @@
 <script setup>
-import { CheckIcon } from '@heroicons/vue/24/solid'
 import { ref } from 'vue'
 
 const { width: screenWidth } = useWindowSize()

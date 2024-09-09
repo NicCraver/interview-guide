@@ -1,8 +1,6 @@
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import { PrismaClient } from '@prisma/client'
-import type { AxiosResponse } from 'axios'
 import axios from 'axios'
-import { v4 as uuidv4 } from 'uuid'
 
 axios.defaults.baseURL = 'http://localhost:3060'
 

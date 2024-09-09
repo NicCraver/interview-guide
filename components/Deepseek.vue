@@ -4,7 +4,6 @@ import { marked } from 'marked'
 
 import MarkdownIt from 'markdown-it'
 import Shiki from '@shikijs/markdown-it'
-import { codeToHtml } from 'shiki'
 import TTextarea from './ui/TTextarea.vue'
 
 // const q = '说说你对 fetch 的理解，它有哪些优点和不足?'

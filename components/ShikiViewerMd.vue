@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { ShikiMagicMove } from 'shiki-magic-move/vue'
 import { createHighlighter } from 'shiki'
 import 'shiki-magic-move/dist/style.css'
 import MarkdownIt from 'markdown-it'
