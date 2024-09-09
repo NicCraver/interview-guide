@@ -1,0 +1,20 @@
+name: Update Questions
+
+on:
+  pull_request:
+    types: [closed]
+
+jobs:
+  run-script:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+      - name: Install dependencies
+        run: npm install
+      - name: Run update questions script
+        run: node scripts/update-questions.js
