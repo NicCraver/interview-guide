@@ -1,4 +1,6 @@
 [build]
+# 清除缓存
+ignore_curl_headers = true
 command = "npm run generate && prisma generate"
 publish = "dist"
 command = "pnpm run build"
