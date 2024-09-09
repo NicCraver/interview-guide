@@ -2,6 +2,7 @@ import { pwa } from './config/pwa'
 import { appDescription } from './constants/index'
 
 export default defineNuxtConfig({
+  ssr: true,
   alias: {
     'monaco-editor': 'monaco-editor/esm/vs/editor/editor.api.js',
   },
@@ -25,6 +26,8 @@ export default defineNuxtConfig({
     'nuxt-monaco-editor',
     '@nuxt/test-utils/module',
     'nuxt-lodash',
+    'nuxt-shiki',
+    '@nuxt/content',
   ],
   lodash: {
     prefix: '_',
@@ -38,7 +41,14 @@ export default defineNuxtConfig({
     ],
   },
   monacoEditor: { lang: 'zh-cn' },
-
+  shiki: {
+    // https://github.com/pi0/nuxt-shiki
+    // https://shiki.style/themes
+    defaultTheme: {
+      light: 'min-light',
+      dark: 'min-dark',
+    },
+  },
   experimental: {
     // when using generate, payload js assets included in sw precache manifest
     // but missing on offline, disabling extraction it until fixed
@@ -61,6 +71,9 @@ export default defineNuxtConfig({
   },
 
   nitro: {
+    externals: {
+      inline: ['gray-matter'],
+    },
     esbuild: {
       options: {
         target: 'esnext',

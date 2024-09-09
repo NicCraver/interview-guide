@@ -16,6 +16,11 @@ export default {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
     },
+    screens: {
+      ...defaultTheme.screens,
+      '3xl': '1920px',
+      '4xl': '2056px',
+    },
   },
   plugins: [
     require('@tailwindcss/forms'),

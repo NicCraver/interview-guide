@@ -11,6 +11,35 @@
 - 题目收藏
 - 题目搜索
 
+您的 Prisma schema 设计非常不错，它涵盖了技术面试题宝典项目的核心功能，并且结构清晰。让我分析一下这个设计的优点和可能的改进点：
+优点：
+
+使用 UUID 作为 User 表的主键，提高了安全性和唯一性。
+分离了 Category 和 QuestionType，允许更灵活的题目分类。
+UserQuestionState 模型很好地捕捉了用户与题目之间的关系。
+Quiz 和 QuizQuestion 模型设计合理，支持测验功能。
+使用了适当的关系类型（一对多、多对多）。
+
+可能的改进点：
+
+考虑添加索引以优化查询性能，特别是对于经常查询的字段。
+可以添加一个 Tag 模型，用于更灵活的题目标记和搜索。
+考虑添加一个错题集模型，方便用户快速复习错误的题目。
+可以在 User 模型中添加一些统计字段，如总分、完成题目数等。
+
+基于这些考虑，我建议对您的 schema 做一些小的调整和添加。以下是修改后的版本：
+Updated Prisma Schema for Interview Question BankClick to open code
+主要的改动和添加包括：
+
+1. 在 User 模型中添加了 totalScore 和 completedQuestions 字段，用于跟踪用户的整体进度。添加了 Tag 和 TagsOnQuestions 模型，支持更灵活的题目标记和搜索。
+2. 在 UserQuestionState 模型中添加了 lastAttemptAt 字段，记录最后尝试时间。添加了 ErrorCollection 模型，用于管理用户的错题集。
+3. 在 Question 模型中为 categoryId 和 questionTypeId 添加了复合索引，优化查询性能。
+4. 在 UserQuestionState 模型中为 userId 和 status 添加了索引，方便按用户和状态快速查询。
+5. 在 Quiz 模型中添加了 createdAt 字段，记录测验创建时间。
+
+这些改动使得数据模型更加完善，能够更好地支持您描述的核心功能，如面试刷题、根据薄弱知识点推荐、错题集、标记学会等。同时，新增的索引和统计字段将有助于提高查询性能和用户体验。
+您对这些修改有什么看法？是否还有其他功能或需求需要在数据模型中体现？
+
 ## 接口
 
 - [ ] 题目列表

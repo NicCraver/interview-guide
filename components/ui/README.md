@@ -22,6 +22,12 @@ Notification({
 })
 ```
 
+### TTextarea
+
+```vue
+<TTextarea v-model="v.answer" />
+```
+
 ### TButton
 
 ```vue

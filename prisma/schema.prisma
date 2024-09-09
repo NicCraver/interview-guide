@@ -1,8 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// 这是您的 Prisma schema 文件
+// 了解更多：https://pris.ly/d/prisma-schema
 
 generator client {
   provider = "prisma-client-js"
@@ -12,83 +9,132 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
-// 用户模型定义
+
+// 用户模型
 model User {
-  id        String   @id @default(uuid()) // 用户ID，自动生成UUID
-  name  String   @unique // 用户名，唯一
-  email     String   @unique // 邮箱，唯一
-  // role      Role     // 用户角色，使用枚举类型Role
-  createdAt DateTime @default(now()) // 创建时间，默认为当前时间
-  updatedAt DateTime @updatedAt // 更新时间，自动更新为当前时间
-
-  // QuizAttempts UserQuizAttempt[] // 用户的测验尝试记录
+  id                  String              @id @default(uuid())
+  name                String              @unique
+  email               String              @unique
+  questions           UserQuestionState[]
+  quizzes             Quiz[]
+  errorCollections    ErrorCollection[]
+  totalScore          Int                 @default(0)
+  completedQuestions  Int                 @default(0)
+  totalQuizzesTaken   Int                 @default(0)
+  lastQuizScore       Int?
+  lastQuizCompletedAt DateTime?
+  createdAt           DateTime            @default(now())
+  updatedAt           DateTime            @updatedAt
 }
 
-// 问题模型定义
+// 题目模型
 model Question {
-  id           String   @id @default(uuid()) // 问题ID，自动生成UUID
-  title        String   // 问题标题
-  type        String   // 问题类型，如单选、多选、填空等
-  content      String   // 问题内容
-  options      Json     // 问题选项，存储为JSON格式
-  correctAnswer String  // 正确答案
-  createdAt    DateTime @default(now()) // 创建时间
-  updatedAt    DateTime @updatedAt // 更新时间
+  id             Int                 @id @default(autoincrement())
+  content        String
+  answer         String
+  difficulty     Int
+  categoryId     Int
+  questionTypeId Int
+  category       Category            @relation(fields: [categoryId], references: [id])
+  questionType   QuestionType        @relation(fields: [questionTypeId], references: [id])
+  userStates     UserQuestionState[]
+  quizQuestions  QuizQuestion[]
+  tags           TagsOnQuestions[]
+  tips           String[]
+  createdAt      DateTime            @default(now())
+  updatedAt      DateTime            @updatedAt
 
-  // QuizQuestions QuizQuestion[] // 与测验问题的关联
-  // UserAnswers   UserAnswer[] // 用户回答记录
+  @@index([categoryId, questionTypeId])
 }
 
-// // 测验模型定义
-// model Quiz {
-//   id          String   @id @default(uuid()) // 测验ID
-//   title       String   // 测验标题
-//   description String   // 测验描述
-//   createdAt   DateTime @default(now()) // 创建时间
-//   updatedAt   DateTime @updatedAt // 更新时间
+// 分类模型
+model Category {
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  description String?
+  questions   Question[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
 
-//   QuizQuestions QuizQuestion[] // 测验包含的问题
-//   QuizAttempts  UserQuizAttempt[] // 用户尝试该测验的记录
-// }
+// 问题类型模型
+model QuestionType {
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  description String?
+  questions   Question[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}
 
-// // 测验问题关联模型定义
-// model QuizQuestion {
-//   id          String   @id @default(uuid()) // ID
-//   quizId      String   // 所属测验ID
-//   questionId  String   // 关联的问题ID
-//   order       Int      // 问题在测验中的顺序
+// 用户题目状态模型
+model UserQuestionState {
+  userId            String
+  questionId        Int
+  status            String
+  isCorrect         Boolean
+  lastAttemptAt     DateTime         @default(now())
+  user              User             @relation(fields: [userId], references: [id])
+  question          Question         @relation(fields: [questionId], references: [id])
+  errorCollection   ErrorCollection? @relation(fields: [errorCollectionId], references: [id])
+  errorCollectionId Int?
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
 
-//   Quiz     Quiz     @relation(fields: [quizId], references: [id]) // 关联到测验
-//   Question Question @relation(fields: [questionId], references: [id]) // 关联到问题
-// }
+  @@id([userId, questionId])
+  @@index([userId, status])
+}
 
-// // 用户测验尝试模型定义
-// model UserQuizAttempt {
-//   id           String   @id @default(uuid()) // 尝试ID
-//   userId       String   // 用户ID
-//   quizId       String   // 测验ID
-//   score        Float    // 得分
-//   completedAt  DateTime @default(now()) // 完成时间
+// 测验模型
+model Quiz {
+  id            Int            @id @default(autoincrement())
+  userId        String
+  score         Int?
+  completedAt   DateTime?
+  createdAt     DateTime       @default(now())
+  user          User           @relation(fields: [userId], references: [id])
+  quizQuestions QuizQuestion[]
+}
 
-//   User  User @relation(fields: [userId], references: [id]) // 关联到用户
-//   Quiz  Quiz @relation(fields: [quizId], references: [id]) // 关联到测验
-//   UserAnswers UserAnswer[] // 用户的答案记录
-// }
+// 测验题目模型
+model QuizQuestion {
+  quizId     Int
+  questionId Int
+  userAnswer String?
+  isCorrect  Boolean
+  quiz       Quiz     @relation(fields: [quizId], references: [id])
+  question   Question @relation(fields: [questionId], references: [id])
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 
-// // 用户答案模型定义
-// model UserAnswer {
-//   id                String   @id @default(uuid()) // 答案ID
-//   userQuizAttemptId String   // 用户测验尝试ID
-//   questionId        String   // 问题ID
-//   answer            String   // 用户的答案
-//   isCorrect         Boolean  // 答案是否正确
+  @@id([quizId, questionId])
+}
 
-//   UserQuizAttempt UserQuizAttempt @relation(fields: [userQuizAttemptId], references: [id]) // 关联到用户测验尝试
-//   Question        Question        @relation(fields: [questionId], references: [id]) // 关联到问题
-// }
+// 标签模型
+model Tag {
+  id        Int               @id @default(autoincrement())
+  name      String            @unique
+  questions TagsOnQuestions[]
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt
+}
 
-// // 角色枚举，定义用户可能的角色
-// enum Role {
-//   ADMIN    // 管理员
-//   STUDENT  // 学生
-// }
+// 题目标签关联模型
+model TagsOnQuestions {
+  tagId      Int
+  questionId Int
+  tag        Tag      @relation(fields: [tagId], references: [id])
+  question   Question @relation(fields: [questionId], references: [id])
+
+  @@id([tagId, questionId])
+}
+
+// 错题集模型
+model ErrorCollection {
+  id        Int                 @id @default(autoincrement())
+  userId    String
+  user      User                @relation(fields: [userId], references: [id])
+  questions UserQuestionState[]
+  createdAt DateTime            @default(now())
+  updatedAt DateTime            @updatedAt
+}
