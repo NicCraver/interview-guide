@@ -238,55 +238,7 @@ async function createInterviewQuestion(questionData: {
 function handleCreateInterviewQuestion() {
   createInterviewQuestion({
     content: '操作数组的方法有哪些？哪些方法会改变原数组？',
-    answer: `- 操作数组的方法有:
-  - push()：向数组末尾添加一个或多个元素。
-  - pop()：移除数组的最后一个元素。
-  - shift()：移除数组的第一个元素。
-  - unshift()：向数组开头添加一个或多个元素。
-  - splice()：删除或替换数组的元素。
-  - slice()：返回一个新的数组，包含原数组的指定部分。
-  - map()：创建一个新数组，其元素是原数组每个元素经过函数处理的结果。
-  - filter()：创建一个新数组，其元素是原数组符合条件的所有元素。
-  - reduce()：将数组中的所有元素缩减为一个值。
-  - every()：测试数组中的所有元素是否都通过了指定函数的测试。
-  - some()：测试数组中是否至少有一个元素通过了指定函数的测试。
-  - findIndex()：返回数组中满足提供的测试函数的第一个元素的索引。
-  
-  - 改变原数组的方法有:
-  - push()
-  - pop()
-  - unshift()
-  - shift()
-  - sort()
-  - reverse()
-  - splice()
-  
-  - **改变原始数组的操作方法:**
-  \`\`\`javascript
-  1. push:向数组末尾添加元素，并返回新的长度
-  2. pop:删除最后一个并返回删除的元素
-  3. unshift:向数组开头添加元素，并返回新的长度
-  4. shift:将第一个元素删除并且返回删除元素，空即为undefined
-  5. reverse:颠倒数组顺序
-  6. sort:对数组排序
-  7. splice:删，增，替换数组元素，返回被删除数组，无除则不返回
-  \`\`\`
-  
-  - **不会改变原始数组的操作方法:**
-  \`\`\`javascript
-  1. concat:连接多个数组，返回新的数组
-  2. join:将数组中所有元素以参数作为分隔符放入一个字符串中
-  3. slice:返回选定元素
-  4. map(es6):数组映射为新的数组
-  5. filter(es6):数组过滤，返回所有通过方法判断后(判断为true时)生成的新数组
-  6. forEach:数组遍历，没有返回值
-  7. every(es6):对数组中的每一项运行给定函数，如每一项均为true时返回true，否则返回false
-  8. some(es6):数组中的的元素运行给定函数，如其中有一项为true时返回true，此时剩余的元素不会再执行检测，如果所有都为false则返回false
-  9. find(es6):寻找数组中符合测试方法(函数)条件的第一个元素，并且返回该元素
-  10. reduce(es6):方法接收一个函数作为累加器，数组中的每个值(从左到右)开始缩减，最终计算为一个值
-  11. indexOf:方法返回在数组中可以找到一个给定元素的第一个索引，如果不存在，则返回-1。
-  12. includes(es7):方法用来判断一个数组是否包含一个指定的值，根据情况，如果包含则返回true,否则返回false。
-  \`\`\``,
+    answer: `- 操作数组的方法有:`,
     difficulty: 5,
     categoryName: 'JavaScript',
     questionTypeName: '数组操作',
