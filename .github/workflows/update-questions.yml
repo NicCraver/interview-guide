@@ -1,5 +1,4 @@
 name: Update Questions
-
 on:
   pull_request:
     types: [closed]
@@ -35,17 +34,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pnpm-store-
 
-      - name: Show environment info
-        run: |
-          node --version
-          pnpm --version
-          cat package.json
-
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: List installed packages
-        run: pnpm list --depth=0
-
       - name: Run update questions script
+        env:
+          DEEP_SEEK_API_KEY: ${{ secrets.DEEP_SEEK_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: node scripts/update-questions.js
