@@ -129,5 +129,7 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+.output
+
 前端高频面试题.md
 提示词.md
