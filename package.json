@@ -50,6 +50,7 @@
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.3",
     "consola": "^3.2.3",
+    "dotenv": "^16.4.5",
     "eslint": "^9.2.0",
     "eslint-plugin-format": "^0.1.1",
     "gpt-3-encoder": "^1.1.4",
