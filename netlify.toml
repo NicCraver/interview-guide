@@ -2,7 +2,7 @@
 # 清除缓存
 ignore_curl_headers = true
 publish = "dist"
-command = "pnpm run generate && prisma generate && pnpm run build"
+command = "prisma generate && pnpm run build"
 
 [build.environment]
 NODE_VERSION = "20"
