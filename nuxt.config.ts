@@ -28,6 +28,8 @@ export default defineNuxtConfig({
     'nuxt-lodash',
     'nuxt-shiki',
     '@nuxt/content',
+    '@nuxtjs/mdc',
+    '@nuxt/image',
   ],
   lodash: {
     prefix: '_',
