@@ -127,10 +127,91 @@ Updated Prisma Schema for Interview Question BankClick to open code
 - [ ] 系统设置导出
 
 ## 其他
-1
-2
 
 ## To Do
 
-- [ ] 提交代码能够自动更新题库
+- [x] 提交代码能够自动更新题库
+- [ ] 题目创建脚本
+
+### node脚本
+
+- [ ] 1. 编写node脚本
+- [ ] 2. 完成createInterviewQuestion函数的脚本
+- [ ] 3. 编写数据库操作相关代码
+- [ ] 4. 创建题目内容、答案、难度、分类、标签、提示等代码。
+- [ ] 5. 数据插入到数据库
+- [ ] 6. 编写AI解析函数
+- [ ] 7. 创建AI解析表并关联题目表
+- [ ] 8. 将AI结果插入到AI解析表中
+- [ ] 9. 查询题目表和AI解析表
+
 - [ ] SEO /Users/nic/Downloads/iShot_2024-09-09_14.00.06.png
+
+## 创建题目流程
+
+components/test-com/manageQuestions.vue
+
+```js
+createInterviewQuestion({
+  content: '操作数组的方法有哪些？哪些方法会改变原数组？',
+  answer: `- 操作数组的方法有:`,
+  difficulty: 5,
+  categoryName: 'JavaScript',
+  questionTypeName: '数组操作',
+  tagNames: ['JavaScript', '数组', '方法', '原数组'],
+  tips: [
+    '熟悉数组常用方法及其功能，尤其是如何操作原数组和不操作原数组的方法。',
+    '注意区分哪些方法会改变原数组的内容，哪些方法会返回新数组。',
+    '理解每个数组方法的作用和它们对数组的影响，例如 push() 和 pop() 会改变原数组，而 slice() 和 map() 不会。',
+  ],
+})
+```
+
+使用该方法创建题目及其相关信息，包括题目内容、答案、难度、分类、标签、提示等。
+
+第一 使用ai生成代码，后使用脚本导入题目
+
+<!-- 提示词拿到createInterviewQuestion，在通过脚本导入题目 -->
+
+```md
+我会发给你一段markdown格式的文本，内容是面试题的标题和答案，我需要你转出json格式，并按照以下格式输出：
+
+createInterviewQuestion({
+content: '行内元素有哪些？块级元素有哪些？ 空(void)元素有那些？行内元素和块级元素有什么区别？',
+answer: `- 行内元素：a、span、img、input、strong、label、select、textarea、button
+
+- 块级元素：div、p、h1-h6、ul、ol、li、dl、dt、dd、table、form
+- 空元素：br、hr、img、input、link、meta
+- 区别：
+  - 布局：块级元素会占满更多的空间（通常是一整行），而行内元素只占用它们所需的空间。
+  - 可嵌套性：块级元素可以包含行内元素和其他块级元素，但行内元素通常不能包含块级元素（尽管有些情况下可以，如在HTML5中，<a>可以包含块级元素）。
+  - 默认行为：块级元素会在前后自动添加换行，而行内元素则不会。`,
+    difficulty: 4,
+    categoryName: 'HTML',
+    questionTypeName: '元素分类',
+    tagNames: ['HTML', '行内元素', '块级元素', '空元素'],
+    tips: [
+    '行内元素通常用于标记小范围的内容，像链接和图片。',
+    '块级元素用于创建文档的主要结构部分，像段落和标题。',
+    '空元素不包含任何内容，它们用来创建空白或分隔符，如换行或水平线。'
+    ],
+    examCenter:[]
+    })
+    其中:
+
+1. difficulty（1-10）、categoryName、questionTypeName、tagNames由你根据内容总结
+2. answer的内容需要你从markdown中提取出来并且保留markdown的格式，回车不要用\n,直接使用``语法把内容包裹即可。记得保留answer的markdown格式！记得保留answer的markdown格式！记得保留answer的markdown格式！
+3. answer过长时，需要你帮我换行，每行不要超过55个中文字符
+4. tips字段是向做题者提供一些提示，帮助做题者理解题目，你可以分几步（不要少于3步）提示做题者， 可以提供一些答案作为提示。注意tips是提示做题者答题的，可以提供一些答案作为例子。提示要直接、精炼、简介、准确、易懂。tips是为了答对answer，尽量和answer内容相关，不要提供无用的内容。
+
+这是我给你发的第一段文字，
+```
+
+第二 components/Deepseek.vue 使用ai生成扩展内容 丰富内容
+
+## 题目通过PR合并上传到题库
+
+1. 创建临时题目表
+2. 脚本将题目导入临时表
+3. 将临时表数据导入正式表
+4. 删除临时表数据
