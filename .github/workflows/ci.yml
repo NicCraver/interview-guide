@@ -40,4 +40,4 @@ jobs:
         run: pnpm install
 
       - name: Typecheck
-        run: prisma generate && pnpm run typecheck
+        run: npx prisma generate && pnpm run typecheck
