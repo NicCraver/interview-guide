@@ -1,4 +1,5 @@
 [build]
+command = "npm run generate && prisma generate"
 publish = "dist"
 command = "pnpm run build"
 
